@@ -4,19 +4,27 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Button, Text, View} from 'react-native';
+import {RootState} from './modules/redux/RootReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {setNickName} from './modules/redux/slice/UserSlice';
 
 function App(): React.JSX.Element {
+  const dispatch = useDispatch();
+
+  const setUserInfo = () => {
+    dispatch(setNickName('sample'));
+    // console.log("result :: ", result)
+  };
+
+  const userInfo = useSelector((state: RootState) => state.user);
 
   return (
-    <SafeAreaView >
+    <SafeAreaView>
       <View>
-        <Text> Page 1 </Text>
+        <Button title="button" onPress={() => setUserInfo} />
+        <Button title="button" onPress={() => console.log(userInfo.nickName)} />
+        <Text>{userInfo.nickName}</Text>
       </View>
     </SafeAreaView>
   );
