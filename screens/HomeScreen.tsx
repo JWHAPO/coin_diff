@@ -9,8 +9,16 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
       <View style={styles.inner}>
         <Text>홈 화면</Text>
         <Button
-          title="상세 화면으로 이동"
-          onPress={() => navigation.navigate('Details')}
+          title="상세 화면 1로 이동"
+          onPress={() => navigation.navigate('Details', { detail: '1' })}
+        />
+        <Button
+          title="상세 화면 2로 이동"
+          onPress={() => navigation.navigate('Details', { detail: '2' })}
+        />
+        <Button
+          title="상세 화면 3로 이동"
+          onPress={() => navigation.navigate('Details', { detail: '3' })}
         />
       </View>
     </SafeAreaView>
