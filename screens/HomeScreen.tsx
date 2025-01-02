@@ -1,29 +1,27 @@
 // HomeScreen.tsx
 
-import React from 'react';
-import { SafeAreaView, View, Text, Button, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { SafeAreaView, View, Text, Button, StyleSheet, FlatList } from 'react-native';
+import { MemberContext } from '../contexts/MemberContext';
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
+  const { members, addMember } = useContext(MemberContext)!;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.inner}>
-        <Text>홈 화면</Text>
+        <Text>회원 정보 목록</Text>
+        <FlatList
+          data={members}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <Text>{item.name} - {item.birthdate} - {item.gender}</Text>
+          )}
+        />
         <View style={styles.buttonContainer}>
           <Button
-            title="상세 화면 1로 이동"
-            onPress={() => navigation.navigate('Details', { detail: '1' })}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            title="상세 화면 2로 이동"
-            onPress={() => navigation.navigate('Details', { detail: '2' })}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            title="상세 화면 3로 이동"
-            onPress={() => navigation.navigate('Details', { detail: '3' })}
+            title="회원 정보 신규 등록"
+            onPress={() => navigation.navigate('RegisterName')}
           />
         </View>
       </View>
