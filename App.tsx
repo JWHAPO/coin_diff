@@ -4,17 +4,11 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 function App(): React.JSX.Element {
-
   return (
-    <SafeAreaView >
+    <SafeAreaView>
       <View>
         <Text> Page 1 </Text>
       </View>
