@@ -11,8 +11,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
-import NewsScreen from './screens/NewsScreen'; // NewsScreen 추가
-import MyScreen from './screens/MyScreen'; // MyScreen 추가
+import NewsScreen from './screens/NewsScreen';
+import MyScreen from './screens/MyScreen';
 import RegisterNameScreen from './screens/RegisterNameScreen';
 import RegisterBirthdateScreen from './screens/RegisterBirthdateScreen';
 import RegisterGenderScreen from './screens/RegisterGenderScreen';
@@ -23,7 +23,11 @@ const Tab = createBottomTabNavigator();
 
 const HomeStack = () => (
   <Stack.Navigator>
-    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen 
+      name="Home" 
+      component={HomeScreen} 
+      options={{ headerShown: false }} // 헤더 숨기기
+    />
     <Stack.Screen name="RegisterName" component={RegisterNameScreen} />
     <Stack.Screen name="RegisterBirthdate" component={RegisterBirthdateScreen} />
     <Stack.Screen name="RegisterGender" component={RegisterGenderScreen} />
