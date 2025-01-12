@@ -6,7 +6,6 @@ import { MemberContext } from '../contexts/MemberContext';
 
 const RegisterNameScreen = ({ navigation }: { navigation: any }) => {
   const [name, setName] = useState('');
-  const { addMember } = useContext(MemberContext)!;
 
   return (
     <SafeAreaView style={styles.container}>

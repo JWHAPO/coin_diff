@@ -13,9 +13,6 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import NewsScreen from './screens/NewsScreen';
 import MyScreen from './screens/MyScreen';
-import RegisterNameScreen from './screens/RegisterNameScreen';
-import RegisterBirthdateScreen from './screens/RegisterBirthdateScreen';
-import RegisterGenderScreen from './screens/RegisterGenderScreen';
 import { MemberProvider } from './contexts/MemberContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -29,9 +26,6 @@ const HomeStack = () => (
       component={HomeScreen} 
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="RegisterName" component={RegisterNameScreen} />
-    <Stack.Screen name="RegisterBirthdate" component={RegisterBirthdateScreen} />
-    <Stack.Screen name="RegisterGender" component={RegisterGenderScreen} />
   </Stack.Navigator>
 );
 
