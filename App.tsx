@@ -13,21 +13,40 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import NewsScreen from './screens/NewsScreen';
 import MyScreen from './screens/MyScreen';
+import RegisterNameScreen from './screens/RegisterNameScreen';
+import RegisterBirthdateScreen from './screens/RegisterBirthdateScreen';
+import RegisterGenderScreen from './screens/RegisterGenderScreen';
 import { MemberProvider } from './contexts/MemberContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const HomeStack = () => (
+const MyScreenStack = () => (
   <Stack.Navigator>
     <Stack.Screen 
-      name="HomeScreen" // 이름 변경
-      component={HomeScreen} 
-      options={{ headerShown: false }}
+      name="MyScreen" 
+      component={MyScreen} 
+      options={{ title: '내 프로필' }} // MyScreen의 헤더 숨김
+    />
+    <Stack.Screen 
+      name="RegisterName" 
+      component={RegisterNameScreen} 
+      options={{ title: '이름 등록' }} // RegisterName의 헤더 설정
+    />
+    <Stack.Screen 
+      name="RegisterBirthdate" 
+      component={RegisterBirthdateScreen} 
+      options={{ title: '생년월일 등록' }} // 생년월일 등록 화면의 헤더 설정
+    />
+    <Stack.Screen 
+      name="RegisterGender" 
+      component={RegisterGenderScreen} 
+      options={{ title: '성별 등록' }} // 성별 등록 화면의 헤더 설정
     />
   </Stack.Navigator>
 );
+
 
 const App = () => {
   return (
@@ -37,11 +56,12 @@ const App = () => {
           <Tab.Navigator>
             <Tab.Screen 
               name="Home" 
-              component={HomeStack} 
+              component={HomeScreen} 
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="home-outline" color={color} size={size} />
                 ),
+                title: '홈'
               }} 
             />
             <Tab.Screen 
@@ -51,15 +71,17 @@ const App = () => {
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="newspaper-outline" color={color} size={size} />
                 ),
+                title: '뉴스'
               }} 
             />
             <Tab.Screen 
               name="My" 
-              component={MyScreen} 
+              component={MyScreenStack} 
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="person-outline" color={color} size={size} />
                 ),
+                headerShown: false,
               }} 
             />
           </Tab.Navigator>

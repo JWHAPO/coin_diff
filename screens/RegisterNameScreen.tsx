@@ -2,7 +2,6 @@
 
 import React, { useState, useContext } from 'react';
 import { SafeAreaView, View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { MemberContext } from '../contexts/MemberContext';
 
 const RegisterNameScreen = ({ navigation }: { navigation: any }) => {
   const [name, setName] = useState('');

@@ -19,7 +19,7 @@ export const MemberProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [members, setMembers] = useState<Member[]>([]);
 
   const addMember = (member: Member) => {
-    setMembers((prev) => [...prev, member]);
+    setMembers((prevMembers) => [...prevMembers, member]);
   };
 
   return (

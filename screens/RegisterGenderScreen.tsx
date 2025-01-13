@@ -13,8 +13,8 @@ const RegisterGenderScreen = ({ navigation, route }: { navigation: any; route: a
     const newMember = { name, birthdate, gender };
     addMember(newMember); // 회원 정보 등록
     navigation.reset({
-      index: 0, // 홈 화면으로 돌아가면서 인덱스를 0으로 설정
-      routes: [{ name: 'Home' }], // 홈 화면으로 이동
+      index: 0, // 상위 화면으로 돌아가면서 인덱스를 0으로 설정
+      routes: [{ name: 'My' }], // 상위 화면으로 이동
     });
   };
 
