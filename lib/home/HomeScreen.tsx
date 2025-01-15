@@ -1,11 +1,26 @@
 // HomeScreen.tsx
 
-import React from 'react';
-import { SafeAreaView, View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, StyleSheet, FlatList, Image, TextInput } from 'react-native';
 import data from './data';
 import { CryptoData } from './types';
 
 const HomeScreen: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // 검색어를 기반으로 데이터 필터링
+  const filteredData = data.filter(item => {
+    const { baseCode, quoteCode, exchanges } = item;
+    const searchLower = searchQuery.toLowerCase();
+
+    // baseCode, quoteCode, exchange name에 검색어가 포함되어 있는지 확인
+    return (
+      baseCode.toLowerCase().includes(searchLower) ||
+      quoteCode.toLowerCase().includes(searchLower) ||
+      exchanges.some(exchange => exchange.name.toLowerCase().includes(searchLower))
+    );
+  });
+
   const renderItem = ({ item }: { item: CryptoData }) => {
     const { baseCode, quoteCode, exchanges } = item;
 
@@ -16,11 +31,11 @@ const HomeScreen: React.FC = () => {
       <View style={styles.tile}>
         {exchanges.map((exchange, index) => (
           <View key={exchange.name} style={styles.exchangeContainer}>
-              {index === 0 ? (
-                <Text style={styles.priceDifferenceText}>{`${baseCode}/${quoteCode}`}</Text>
-              ) : (
-                <Text style={styles.priceDifferenceText}>{`${priceDifference}%`}</Text>
-              )}
+            {index === 0 ? (
+              <Text style={styles.priceDifferenceText}>{`${baseCode}/${quoteCode}`}</Text>
+            ) : (
+              <Text style={styles.priceDifferenceText}>{`${priceDifference}%`}</Text>
+            )}
             <Image source={exchange.logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.exchangeInfo}>
               <Text style={styles.tileText}>{exchange.price}</Text>
@@ -34,8 +49,14 @@ const HomeScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search by name or code..."
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+      />
       <FlatList
-        data={data}
+        data={filteredData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
@@ -47,6 +68,14 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  searchInput: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    margin: 12,
   },
   list: {
     padding: 12,
