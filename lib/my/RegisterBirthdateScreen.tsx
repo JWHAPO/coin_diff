@@ -2,7 +2,7 @@
 
 import React, { useState, useContext } from 'react';
 import { SafeAreaView, View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { MemberContext } from '../contexts/MemberContext';
+import { MemberContext } from '../../contexts/MemberContext';
 
 const RegisterBirthdateScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const { name } = route.params; // 이름을 route.params에서 가져옵니다.

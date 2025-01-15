@@ -10,12 +10,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import HomeScreen from './screens/HomeScreen';
-import NewsScreen from './screens/NewsScreen';
-import MyScreen from './screens/MyScreen';
-import RegisterNameScreen from './screens/RegisterNameScreen';
-import RegisterBirthdateScreen from './screens/RegisterBirthdateScreen';
-import RegisterGenderScreen from './screens/RegisterGenderScreen';
+import HomeScreen from './lib/home/HomeScreen';
+import NewsScreen from './lib/news/NewsScreen';
+import MyScreen from './lib/my/MyScreen';
+import RegisterNameScreen from './lib/my/RegisterNameScreen';
+import RegisterBirthdateScreen from './lib/my/RegisterBirthdateScreen';
+import RegisterGenderScreen from './lib/my/RegisterGenderScreen';
 import { MemberProvider } from './contexts/MemberContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 

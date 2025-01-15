@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react';
 import { SafeAreaView, View, Text, Button, StyleSheet, FlatList } from 'react-native';
-import { MemberContext } from '../contexts/MemberContext';
+import { MemberContext } from '../../contexts/MemberContext';
 
 const MyScreen = ({ navigation }: { navigation: any }) => {
   const { members } = useContext(MemberContext)!;

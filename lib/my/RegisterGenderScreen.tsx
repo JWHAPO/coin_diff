@@ -2,7 +2,7 @@
 
 import React, { useState, useContext } from 'react';
 import { SafeAreaView, View, Text, Button, StyleSheet } from 'react-native';
-import { MemberContext } from '../contexts/MemberContext';
+import { MemberContext } from '../../contexts/MemberContext';
 
 const RegisterGenderScreen = ({ navigation, route }: { navigation: any; route: any }) => {
   const { name, birthdate } = route.params; // 이름과 생년월일 가져오기
