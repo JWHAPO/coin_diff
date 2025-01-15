@@ -13,11 +13,13 @@ const HomeScreen: React.FC = () => {
     const { baseCode, quoteCode, exchanges } = item;
     const searchLower = searchQuery.toLowerCase();
 
+    // 새 검색 기준: '$baseCode/$quoteCode$baseCode${exchange.name}'
+    const searchString = `${baseCode}/${quoteCode}${baseCode}${quoteCode}`;
+
     // baseCode, quoteCode, exchange name에 검색어가 포함되어 있는지 확인
     return (
-      baseCode.toLowerCase().includes(searchLower) ||
-      quoteCode.toLowerCase().includes(searchLower) ||
-      exchanges.some(exchange => exchange.name.toLowerCase().includes(searchLower))
+      searchString.toLowerCase().includes(searchLower) ||
+      exchanges.some(exchange => `${searchString}${exchange.name}`.toLowerCase().includes(searchLower))
     );
   });
 
