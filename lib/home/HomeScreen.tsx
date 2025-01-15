@@ -40,8 +40,12 @@ const HomeScreen: React.FC = () => {
             )}
             <Image source={exchange.logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.exchangeInfo}>
-              <Text style={styles.tileText}>{exchange.price}</Text>
-              <Text style={styles.tileText}>{`${exchange.changeRate} %`}</Text>
+              <Text style={styles.tileText} numberOfLines={1} adjustsFontSizeToFit>
+                {exchange.price}
+              </Text>
+              <Text style={styles.tileText} numberOfLines={1} adjustsFontSizeToFit>
+                {`${exchange.changeRate} %`}
+              </Text>
             </View>
           </View>
         ))}
@@ -109,6 +113,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     flexShrink: 1, // 텍스트가 필요한 공간만 차지하도록 설정
     flex: 2, // 텍스트 영역 비율 설정
+    textAlignVertical: 'center', // 수직 정렬을 중앙으로 설정
   },
   priceDifferenceText: {
     textAlign: 'left',
