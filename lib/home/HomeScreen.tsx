@@ -40,10 +40,10 @@ const HomeScreen: React.FC = () => {
             )}
             <Image source={exchange.logo} style={styles.logo} resizeMode="contain" />
             <View style={styles.exchangeInfo}>
-              <Text style={styles.tileText} numberOfLines={1} adjustsFontSizeToFit>
+              <Text style={styles.priceText} numberOfLines={1} adjustsFontSizeToFit>
                 {exchange.price}
               </Text>
-              <Text style={styles.tileText} numberOfLines={1} adjustsFontSizeToFit>
+              <Text style={styles.changePercentText} numberOfLines={1} adjustsFontSizeToFit>
                 {`${exchange.changeRate} %`}
               </Text>
             </View>
@@ -99,6 +99,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 8,
   },
+  priceDifferenceText: {
+    textAlign: 'left',
+    fontWeight: 'bold',
+    marginVertical: 4,
+    flexShrink: 1, // 텍스트가 필요한 공간만 차지하도록 설정
+    flex: 1, // 괴리율 영역 비율 설정
+  },
   logo: {
     width: 30,
     height: 30,
@@ -107,23 +114,19 @@ const styles = StyleSheet.create({
   exchangeInfo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 1,
+    flex: 2,
   },
-  tileText: {
+  priceText: {
+    textAlign: 'right',
+    flexShrink: 1, // 텍스트가 필요한 공간만 차지하도록 설정
+    flex: 4, // 텍스트 영역 비율 설정
+    textAlignVertical: 'center', // 수직 정렬을 중앙으로 설정
+  },
+  changePercentText: {
     textAlign: 'right',
     flexShrink: 1, // 텍스트가 필요한 공간만 차지하도록 설정
     flex: 2, // 텍스트 영역 비율 설정
     textAlignVertical: 'center', // 수직 정렬을 중앙으로 설정
-  },
-  priceDifferenceText: {
-    textAlign: 'left',
-    fontWeight: 'bold',
-    marginVertical: 4,
-    flex: 1, // 괴리율 영역 비율 설정
-  },
-  infoContainer: {
-    flex: 2, // BTC/USDT 및 괴리율의 비율 설정
-    justifyContent: 'center',
   },
 });
 

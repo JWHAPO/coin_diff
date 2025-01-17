@@ -45,8 +45,8 @@ const data: CryptoData[] = [
       baseCode: 'DOGE',
       quoteCode: 'USDT',
       exchanges: [
-        { name: 'Bithumb', logo: require('../../assets/exchangeBithumb.png'), price: 0.000029382492, changeRate: '+234.25' },
-        { name: 'OKX', logo: require('../../assets/exchangeOkx.jpeg'), price: 0.000029424129, changeRate: '-10.40' },
+        { name: 'Bithumb', logo: require('../../assets/exchangeBithumb.png'), price: 0.0000029382492, changeRate: '+234.25' },
+        { name: 'OKX', logo: require('../../assets/exchangeOkx.jpeg'), price: 0.0000029424129, changeRate: '-10.40' },
       ],
     },
     {
