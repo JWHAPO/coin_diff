@@ -7,11 +7,11 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
-import HomeScreen from './lib/home/HomeScreen';
+import HomeScreen from './src/home/HomeScreen';
 import { MemberProvider } from './contexts/MemberContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import MyScreenStack from './lib/my/MyScreenStack';
-import NewsStack from './lib/news/NewsStack';
+import MyScreenStack from './src/my/MyScreenStack';
+import NewsStack from './src/news/NewsStack';
 
 const Tab = createBottomTabNavigator();
 
