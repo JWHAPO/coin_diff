@@ -1,5 +1,3 @@
-// App.tsx
-
 /**
  * Coin Diff React Native App
  * Authors : LYJ, CJY, PJH, KJW
@@ -9,44 +7,73 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text } from 'react-native'; // View와 Text 추가 임포트
 import HomeScreen from './lib/home/HomeScreen';
-import NewsScreen from './lib/news/NewsScreen';
 import MyScreen from './lib/my/MyScreen';
 import RegisterNameScreen from './lib/my/RegisterNameScreen';
 import RegisterBirthdateScreen from './lib/my/RegisterBirthdateScreen';
 import RegisterGenderScreen from './lib/my/RegisterGenderScreen';
 import { MemberProvider } from './contexts/MemberContext';
 import Icon from 'react-native-vector-icons/Ionicons';
+import NewsListScreen from './lib/news/NewsListScreen';
 
+// Stack과 Tab Navigator 생성
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+// NewsDetailScreen 추가
+const NewsDetailScreen = ({ route }: { route: any }) => { // 타입 정의 추가
+  const { news } = route.params;
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>{news.title}</Text>
+      <Text style={styles.timeAgo}>{news.timeAgo}</Text>
+      <Text>{news.content}</Text>
+    </View>
+  );
+};
+
+// MyScreenStack 구성
 const MyScreenStack = () => (
   <Stack.Navigator>
     <Stack.Screen 
       name="MyScreen" 
       component={MyScreen} 
-      options={{ title: '내 프로필' }} // MyScreen의 헤더 숨김
+      options={{ title: '내 프로필' }} 
     />
     <Stack.Screen 
       name="RegisterName" 
       component={RegisterNameScreen} 
-      options={{ title: '이름 등록' }} // RegisterName의 헤더 설정
+      options={{ title: '이름 등록' }} 
     />
     <Stack.Screen 
       name="RegisterBirthdate" 
       component={RegisterBirthdateScreen} 
-      options={{ title: '생년월일 등록' }} // 생년월일 등록 화면의 헤더 설정
+      options={{ title: '생년월일 등록' }} 
     />
     <Stack.Screen 
       name="RegisterGender" 
       component={RegisterGenderScreen} 
-      options={{ title: '성별 등록' }} // 성별 등록 화면의 헤더 설정
+      options={{ title: '성별 등록' }} 
     />
   </Stack.Navigator>
 );
 
+// NewsStack 구성
+const NewsStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen 
+      name="NewsList" 
+      component={NewsListScreen} 
+      options={{ title: '뉴스 목록' }} 
+    />
+    <Stack.Screen 
+      name="NewsDetail" 
+      component={NewsDetailScreen} 
+      options={{ title: '뉴스 상세보기' }} 
+    />
+  </Stack.Navigator>
+);
 
 const App = () => {
   return (
@@ -66,7 +93,7 @@ const App = () => {
             />
             <Tab.Screen 
               name="News" 
-              component={NewsScreen} 
+              component={NewsStack} 
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="newspaper-outline" color={color} size={size} />
@@ -94,6 +121,13 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  timeAgo: {
+    color: '#777',
   },
 });
 
