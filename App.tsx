@@ -9,13 +9,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaView, StyleSheet, View, Text } from 'react-native'; // View와 Text 추가 임포트
 import HomeScreen from './lib/home/HomeScreen';
-import MyScreen from './lib/my/MyScreen';
-import RegisterNameScreen from './lib/my/RegisterNameScreen';
-import RegisterBirthdateScreen from './lib/my/RegisterBirthdateScreen';
-import RegisterGenderScreen from './lib/my/RegisterGenderScreen';
 import { MemberProvider } from './contexts/MemberContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NewsListScreen from './lib/news/NewsListScreen';
+import MyScreenStack from './lib/my/MyScreenStack';
 
 // Stack과 Tab Navigator 생성
 const Stack = createStackNavigator();
@@ -32,32 +29,6 @@ const NewsDetailScreen = ({ route }: { route: any }) => { // 타입 정의 추�
     </View>
   );
 };
-
-// MyScreenStack 구성
-const MyScreenStack = () => (
-  <Stack.Navigator>
-    <Stack.Screen 
-      name="MyScreen" 
-      component={MyScreen} 
-      options={{ title: '내 프로필' }} 
-    />
-    <Stack.Screen 
-      name="RegisterName" 
-      component={RegisterNameScreen} 
-      options={{ title: '이름 등록' }} 
-    />
-    <Stack.Screen 
-      name="RegisterBirthdate" 
-      component={RegisterBirthdateScreen} 
-      options={{ title: '생년월일 등록' }} 
-    />
-    <Stack.Screen 
-      name="RegisterGender" 
-      component={RegisterGenderScreen} 
-      options={{ title: '성별 등록' }} 
-    />
-  </Stack.Navigator>
-);
 
 // NewsStack 구성
 const NewsStack = () => (
