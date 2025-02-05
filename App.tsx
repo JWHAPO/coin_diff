@@ -3,11 +3,13 @@
  * Authors : LYJ, CJY, PJH, KJW
  */
 
+// App.tsx
+
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
-import HomeScreen from './src/home/HomeScreen';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import HomeStack from './src/home/HomeStack'; // HomeStack import
 import { MemberProvider } from './contexts/MemberContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MyScreenStack from './src/my/MyScreenStack';
@@ -22,8 +24,8 @@ const App = () => {
         <SafeAreaView style={styles.container}>
           <Tab.Navigator>
             <Tab.Screen 
-              name="Home" 
-              component={HomeScreen} 
+              name="HomeTab" // 이름 변경
+              component={HomeStack} 
               options={{
                 tabBarIcon: ({ color, size }) => (
                   <Icon name="home-outline" color={color} size={size} />
@@ -61,13 +63,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  timeAgo: {
-    color: '#777',
   },
 });
 

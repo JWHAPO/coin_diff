@@ -1,19 +1,29 @@
 // HomeScreen.tsx
 
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, FlatList, Image, TextInput } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, FlatList, Image, TextInput, TouchableOpacity } from 'react-native';
 import data from './data';
 import { CryptoData } from './types';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+
+// Stack Navigator의 타입 정의
+type RootStackParamList = {
+  HomeScreen: undefined;
+  DetailScreen: { coin: CryptoData };
+};
+
+// HomeScreen에서 사용할 navigation의 타입 정의
+type HomeScreenNavigationProp = NavigationProp<RootStackParamList, 'HomeScreen'>;
 
 const HomeScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   // 검색어를 기반으로 데이터 필터링
   const filteredData = data.filter(item => {
     const { baseCode, quoteCode, exchanges } = item;
     const searchLower = searchQuery.toLowerCase();
 
-    // 새 검색 기준: '$baseCode/$quoteCode$baseCode${exchange.name}'
     const searchString = `${baseCode}/${quoteCode}${baseCode}${quoteCode}`;
 
     // baseCode, quoteCode, exchange name에 검색어가 포함되어 있는지 확인
@@ -23,33 +33,35 @@ const HomeScreen: React.FC = () => {
     );
   });
 
-  const renderItem = ({ item }: { item: CryptoData }) => {
+  const handleRenderItem = ({ item }: { item: CryptoData }) => {
     const { baseCode, quoteCode, exchanges } = item;
 
     // 가격 괴리율 계산
     const priceDifference = ((exchanges[1].price - exchanges[0].price) / exchanges[0].price * 100).toFixed(2);
 
     return (
-      <View style={styles.tile}>
-        {exchanges.map((exchange, index) => (
-          <View key={exchange.name} style={styles.exchangeContainer}>
-            {index === 0 ? (
-              <Text style={styles.priceDifferenceText}>{`${baseCode}/${quoteCode}`}</Text>
-            ) : (
-              <Text style={styles.priceDifferenceText}>{`${priceDifference}%`}</Text>
-            )}
-            <Image source={exchange.logo} style={styles.logo} resizeMode="contain" />
-            <View style={styles.exchangeInfo}>
-              <Text style={styles.priceText} numberOfLines={1} adjustsFontSizeToFit>
-                {exchange.price}
-              </Text>
-              <Text style={styles.changePercentText} numberOfLines={1} adjustsFontSizeToFit>
-                {`${exchange.changeRate} %`}
-              </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { coin: item })}>
+        <View style={styles.tile}>
+          {exchanges.map((exchange, index) => (
+            <View key={exchange.name} style={styles.exchangeContainer}>
+              {index === 0 ? (
+                <Text style={styles.priceDifferenceText}>{`${baseCode}/${quoteCode}`}</Text>
+              ) : (
+                <Text style={styles.priceDifferenceText}>{`${priceDifference}%`}</Text>
+              )}
+              <Image source={exchange.logo} style={styles.logo} resizeMode="contain" />
+              <View style={styles.exchangeInfo}>
+                <Text style={styles.priceText} numberOfLines={1} adjustsFontSizeToFit>
+                  {exchange.price}
+                </Text>
+                <Text style={styles.changePercentText} numberOfLines={1} adjustsFontSizeToFit>
+                  {`${exchange.changeRate} %`}
+                </Text>
+              </View>
             </View>
-          </View>
-        ))}
-      </View>
+          ))}
+        </View>
+      </TouchableOpacity>
     );
   };
 
@@ -63,7 +75,7 @@ const HomeScreen: React.FC = () => {
       />
       <FlatList
         data={filteredData}
-        renderItem={renderItem}
+        renderItem={handleRenderItem}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
       />
@@ -103,8 +115,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: 'bold',
     marginVertical: 4,
-    flexShrink: 1, // 텍스트가 필요한 공간만 차지하도록 설정
-    flex: 1, // 괴리율 영역 비율 설정
+    flexShrink: 1,
+    flex: 1,
   },
   logo: {
     width: 30,
@@ -118,15 +130,15 @@ const styles = StyleSheet.create({
   },
   priceText: {
     textAlign: 'right',
-    flexShrink: 1, // 텍스트가 필요한 공간만 차지하도록 설정
-    flex: 4, // 텍스트 영역 비율 설정
-    textAlignVertical: 'center', // 수직 정렬을 중앙으로 설정
+    flexShrink: 1,
+    flex: 4,
+    textAlignVertical: 'center',
   },
   changePercentText: {
     textAlign: 'right',
-    flexShrink: 1, // 텍스트가 필요한 공간만 차지하도록 설정
-    flex: 2, // 텍스트 영역 비율 설정
-    textAlignVertical: 'center', // 수직 정렬을 중앙으로 설정
+    flexShrink: 1,
+    flex: 2,
+    textAlignVertical: 'center',
   },
 });
 
