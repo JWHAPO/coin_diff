@@ -37,7 +37,8 @@ const HomeScreen: React.FC = () => {
     const { baseCode, quoteCode, exchanges } = item;
 
     // 가격 괴리율 계산
-    const priceDifference = ((exchanges[1].price - exchanges[0].price) / exchanges[0].price * 100).toFixed(2);
+    const priceDifference = ((exchanges[1].price - exchanges[0].price) / exchanges[0].price * 100);
+    const priceDifferenceColor = priceDifference > 0 ? 'green' : priceDifference < 0 ? 'red' : 'gray';
 
     return (
       <TouchableOpacity onPress={() => navigation.navigate('DetailScreen', { coin: item })}>
@@ -47,14 +48,14 @@ const HomeScreen: React.FC = () => {
               {index === 0 ? (
                 <Text style={styles.priceDifferenceText}>{`${baseCode}/${quoteCode}`}</Text>
               ) : (
-                <Text style={styles.priceDifferenceText}>{`${priceDifference}%`}</Text>
+                <Text style={[styles.priceDifferenceText, { color: priceDifferenceColor }]}>{`${priceDifference.toFixed(2)}%`}</Text>
               )}
               <Image source={exchange.logo} style={styles.logo} resizeMode="contain" />
               <View style={styles.exchangeInfo}>
                 <Text style={styles.priceText} numberOfLines={1} adjustsFontSizeToFit>
                   {exchange.price}
                 </Text>
-                <Text style={styles.changePercentText} numberOfLines={1} adjustsFontSizeToFit>
+                <Text style={[styles.changePercentText, { color: priceDifferenceColor }]} numberOfLines={1} adjustsFontSizeToFit>
                   {`${exchange.changeRate} %`}
                 </Text>
               </View>
